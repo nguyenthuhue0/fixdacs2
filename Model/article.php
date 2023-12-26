@@ -226,7 +226,19 @@ class Article {
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
-    } 
+    }
+
+    public function getArticleByTitle($title) {
+        try {
+            $sql = "SELECT * FROM article WHERE title LIKE '%$title%'";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
+        }
+    }
 }    
 
 ?>
